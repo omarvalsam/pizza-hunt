@@ -13,7 +13,7 @@ const pizzaController = {
       .then((dbPizzaData) => res.json(dbPizzaData))
       .catch((err) => {
         console.log(err);
-        res.status(400).json(err);
+        res.status(400);
       });
   },
   // get one pizza by id
@@ -24,17 +24,10 @@ const pizzaController = {
         select: "-__v",
       })
       .select("-__v")
-      .then((dbPizzaData) => {
-        // If no pizza is found, send 404
-        if (!dbPizzaData) {
-          res.status(404).json({ message: "No pizza found with this id!" });
-          return;
-        }
-        res.json(dbPizzaData);
-      })
+      .then((dbPizzaData) => res.json(dbPizzaData))
       .catch((err) => {
         console.log(err);
-        res.status(404).json(err);
+        res.sendStatus(400);
       });
   },
 
